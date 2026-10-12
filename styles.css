@@ -1,0 +1,239 @@
+:root {
+    --verde-mexico: #006847;
+    --blanco: #ffffff;
+    --rojo-mexico: #ce1126;
+    --gris-fondo: #f4f6f8;
+    --texto: #333333;
+    --dorado: #d4af37;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--gris-fondo);
+    color: var(--texto);
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: var(--rojo-mexico);
+    color: var(--blanco);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid var(--rojo-mexico);
+}
+
+nav h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.nav-tabs button {
+    background: transparent;
+    border: 1px solid var(--blanco);
+    color: var(--blanco);
+    padding: 8px 12px;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.nav-tabs button.active {
+    background-color: var(--blanco);
+    color: var(--verde-mexico);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.card {
+    background-color: var(--blanco);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+button.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--verde-mexico);
+    color: var(--blanco);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button.btn-primary:hover {
+    background-color: #004d34;
+}
+
+.filter-box {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.properties-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.property-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.property-img-container {
+    width: 100%;
+    height: 180px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.property-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-header {
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.property-body {
+    padding: 15px;
+}
+
+.property-price {
+    font-size: 1.3rem;
+    color: var(--verde-mexico);
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.badge-verified {
+    background-color: #28a745;
+    color: white;
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.badge-ejido {
+    background-color: var(--dorado);
+    color: white;
+    font-size: 0.75rem;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.contact-box {
+    background-color: #f1f3f5;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.85rem;
+}
+
+.user-info {
+    font-size: 0.9rem;
+    color: #d1e7dd;
+    margin-top: 5px;
+}
+
+.img-preview {
+    max-width: 100%;
+    max-height: 150px;
+    margin-top: 10px;
+    display: none;
+    border-radius: 4px;
+}
+
+.sin-foto {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+#mensajeFormulario {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+#mensajeFormulario.ok {
+    color: var(--verde-mexico);
+}
+
+#mensajeFormulario.error {
+    color: var(--rojo-mexico);
+}
+
+button.btn-primary:disabled {
+    background-color: #8a9a93;
+    cursor: wait;
+}
