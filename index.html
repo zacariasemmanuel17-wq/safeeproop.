@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeProp México - Inmuebles y Terrenos Ejidales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <div>
+            <h1>SafeProp MX</h1>
+            <div id="userInfoNav" class="user-info">Sesión: No registrado</div>
+        </div>
+        <div class="nav-tabs">
+            <button onclick="switchTab('registroTab')" data-tab="registroTab" class="active">Registro / Login</button>
+            <button onclick="switchTab('publicarTab')" data-tab="publicarTab">Publicar Inmueble</button>
+            <button onclick="switchTab('catalogoTab')" data-tab="catalogoTab">Ver Catálogo</button>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div id="registroTab" class="tab-content active card">
+            <h2>Registro de Usuario (Comprador / Vendedor)</h2>
+            <form id="formRegistro" onsubmit="registrarUsuario(event)">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="regNombre">Nombre Completo:</label>
+                        <input type="text" id="regNombre" required minlength="3" maxlength="120" placeholder="Ej. Juan Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label for="regRFC">RFC (Validación Oficial):</label>
+                        <input type="text" id="regRFC" maxlength="13" pattern="[A-Za-zÑñ&]{3,4}[0-9]{6}[A-Za-z0-9]{3}" style="text-transform:uppercase" required placeholder="Ej. PERJ880101XXX">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="regTel">Teléfono de Contacto (WhatsApp, 10 dígitos):</label>
+                        <input type="tel" id="regTel" required pattern="[0-9]{10}" maxlength="10" placeholder="Ej. 3312345678">
+                    </div>
+                    <div class="form-group">
+                        <label for="regTipo">Tipo de Perfil:</label>
+                        <select id="regTipo" required>
+                            <option value="Vendedor/Propietario">Vendedor / Ejidatario</option>
+                            <option value="Comprador">Comprador</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Registrar y Comenzar</button>
+            </form>
+        </div>
+
+        <div id="publicarTab" class="tab-content card">
+            <h2>Publicar Casa, Edificio o Terreno Ejidal</h2>
+            <form id="formPublicar" onsubmit="publicarInmueble(event)">
+                <div class="form-group">
+                    <label for="pubTitulo">Título de la Publicación:</label>
+                    <input type="text" id="pubTitulo" minlength="3" maxlength="150" placeholder="Ej. Terreno Ejidal con Uso de Suelo Agrícola" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="pubTipo">Tipo de Propiedad:</label>
+                        <select id="pubTipo" required>
+                            <option value="Casa">Casa</option>
+                            <option value="Departamento">Departamento</option>
+                            <option value="Local comercial">Local comercial</option>
+                            <option value="Edificio">Edificio</option>
+                            <option value="Terreno">Terreno</option>
+                            <option value="Terreno Ejidal">Terreno Ejidal (Parcelario)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pubEstado">Estado de la República:</label>
+                        <select id="pubEstado" required>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="Ciudad de México">Ciudad de México</option>
+                            <option value="Nuevo León">Nuevo León</option>
+                            <option value="Estado de México">Estado de México</option>
+                            <option value="Guanajuato">Guanajuato</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="pubUbicacion">Ubicación (municipio, colonia o ejido):</label>
+                        <input type="text" id="pubUbicacion" minlength="3" maxlength="200" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pubSuperficie">Superficie en m²:</label>
+                        <input type="number" id="pubSuperficie" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="pubPrecio">Precio Solicitado (MXN):</label>
+                        <input type="number" id="pubPrecio" placeholder="0.00" min="1" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pubDocumento">Documento de Soporte (Legalidad):</label>
+                        <select id="pubDocumento" required>
+                            <option value="Escritura Pública RPP">Escritura Pública (Urbano)</option>
+                            <option value="Certificado Parcelario RAN">Certificado Parcelario / RAN (Ejidal)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pubFoto">Fotografía Principal del Inmueble (máx. 5 MB):</label>
+                    <input type="file" id="pubFoto" accept="image/jpeg,image/png,image/webp" onchange="mostrarVistaPrevia(event)">
+                    <img id="vistaPrevia" class="img-preview" alt="Vista previa de la foto">
+                </div>
+
+                <div class="form-group">
+                    <label for="pubDesc">Descripción de la propiedad y estatus legal:</label>
+                    <textarea id="pubDesc" rows="3" minlength="10" maxlength="5000" placeholder="Detalla las características y confirma si cuentas con el Derecho del Tanto notificado o pagos de predial al corriente." required></textarea>
+                </div>
+
+                <button type="submit" id="btnPublicar" class="btn-primary">Enviar para revisión</button>
+                <p id="mensajeFormulario" role="status"></p>
+            </form>
+        </div>
+
+        <div id="catalogoTab" class="tab-content card">
+            <h2>Propiedades Verificadas Disponibles</h2>
+
+            <div class="filter-box">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="filtroEstado">Filtrar por Región (Estado):</label>
+                        <select id="filtroEstado" onchange="aplicarFiltros()">
+                            <option value="TODOS">Todos los Estados</option>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="Ciudad de México">Ciudad de México</option>
+                            <option value="Nuevo León">Nuevo León</option>
+                            <option value="Estado de México">Estado de México</option>
+                            <option value="Guanajuato">Guanajuato</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroPrecio">Precio Máximo (MXN):</label>
+                        <input type="number" id="filtroPrecio" placeholder="Sin límite" oninput="aplicarFiltros()">
+                    </div>
+                </div>
+            </div>
+
+            <div id="listaPropiedades" class="properties-grid">Cargando propiedades...</div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
